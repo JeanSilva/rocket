@@ -1,4 +1,4 @@
-package com.rocket.models;
+package com.rocket.models.cliente;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-@Table(name = "Cleintes")
+@Table(name = "Clientes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +17,6 @@ import org.hibernate.validator.constraints.br.CPF;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(nullable = false)
@@ -38,13 +37,40 @@ public class Cliente {
     @NotEmpty(message = "Senha não pode ser Vazio.")
     private String senha;
 
+    @Column(nullable = false)
+    private String documentoIdentidadeFrente;
+
+    @Column(nullable = false)
+    private String comprovanteReseidenciaFrente;
+
+    @Column(nullable = false)
+    private String documentoIdentidadeVerso;
+
+    @Column(nullable = false)
+    private String comprovanteReseidenciaVerso;
+
+    @Column(nullable = false)
+    private String selfRosto;
+
+    @Column()
+    private boolean aprovado = false;
+
+
+
     @Builder
-    public Cliente(String nome, String cpf, String nomeMae, String senha) {
+    public Cliente(String nome, String cpf, String nomeMae, String senha, String documentoIdentidadeFrente, String comprovanteReseidenciaFrente,
+    String documentoIdentidadeVerso, String comprovanteReseidenciaVerso,  String selfRosto, boolean aprovado) {
         this.nome = nome;
         this.cpf = cpf;
         this.nomeMae = nomeMae;
         this.senha = senha;
+        this.documentoIdentidadeFrente = documentoIdentidadeFrente;
+        this.documentoIdentidadeVerso = documentoIdentidadeVerso;
+        this.comprovanteReseidenciaVerso = comprovanteReseidenciaVerso;
+        this.comprovanteReseidenciaFrente = comprovanteReseidenciaFrente;
 
+        this.selfRosto = selfRosto;
+        this.aprovado = aprovado;
 
     }
     @Override
